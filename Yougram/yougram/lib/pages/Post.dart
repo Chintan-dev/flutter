@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class Post extends StatefulWidget {
@@ -36,28 +38,26 @@ class _PostState extends State<Post> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: ListView(
-          children: List<Widget>.generate(9, (index) {
-            Key n1 = GlobalKey();
-            int val = index;
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: GestureDetector(
-                  key: n1,
-                  child: Hero(
-                    tag: index.toString(),
-                    child: _smallImage(val),
-                  ),
-                  onTap: () => _fullImagePage(context, val, index.toString()),
+    return Scaffold(
+      body: ListView(
+        children: List<Widget>.generate(9, (index) {
+          Key n1 = GlobalKey();
+          int val = index;
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: GestureDetector(
+                key: n1,
+                child: Hero(
+                  tag: index.toString(),
+                  child: _smallImage(val),
                 ),
-                title: Text('Tap for transition $val'),
+                onTap: () => _fullImagePage(context, val, index.toString()),
               ),
-            );
-          }),
-        ),
+              title: Text('Tap for transition $val'),
+            ),
+          );
+        }),
       ),
     );
   }

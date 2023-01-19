@@ -6,10 +6,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 class Homepage extends StatefulWidget {
-  final title;
   const Homepage({
     super.key,
-    required this.title,
   });
 
   @override
@@ -24,39 +22,6 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     var scaffold = Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      //   title: const Center(
-      //     child: Text(
-      //       'Yourgam',
-      //       style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-      //     ),
-      //   ),
-      //   leadingWidth: 54,
-      //   leading: Align(
-      //     alignment: Alignment.centerRight,
-      //     child: IconBackground(
-      //       icon: Icons.search,
-      //       onTap: () {
-      //         //logger.i('TODO search');
-      //       },
-      //     ),
-      //   ),
-      //   // ignore: prefer_const_literals_to_create_immutables
-      //   actions: [
-      //     const Padding(
-      //       padding: EdgeInsets.only(right: 20.0),
-      //       child: Hero(
-      //         tag: 'hero-profile-picture',
-      //         child: CircleAvatar(
-      //           radius: 20,
-      //           //backgroundImage: AssetImage('img/1.jpg'),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
       body: PageView(
         controller: _pageController,
         onPageChanged: (newindex) {
