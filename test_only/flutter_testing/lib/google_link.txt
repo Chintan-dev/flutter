@@ -1,0 +1,17 @@
+From any directory, run this command:
+
+dart pub global activate flutterfire_cli
+
+Then, at the root of your Flutter project directory, run this command:
+
+flutterfire configure --project=yougram--com
+
+
+
+Platform  Firebase App Id
+web       1:41545296369:web:6a93bdbbcb04a798c23c50
+android   1:41545296369:android:a5a9275c59d2bff5c23c50
+ios       1:41545296369:ios:0e2d8d0af69d60fac23c50
+macos     1:41545296369:ios:0e2d8d0af69d60fac23c50
+
+

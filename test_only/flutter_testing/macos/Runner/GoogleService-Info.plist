@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>41545296369-5dd5a76mv9ffhkovoo1gclruu4ibif1h.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.41545296369-5dd5a76mv9ffhkovoo1gclruu4ibif1h</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAkHeDYhe7DJdSOzaAkU4fQs79I0PsPCp8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>41545296369</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.flutterTesting</string>
+	<key>PROJECT_ID</key>
+	<string>yougram--com</string>
+	<key>STORAGE_BUCKET</key>
+	<string>yougram--com.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:41545296369:ios:0e2d8d0af69d60fac23c50</string>
+	<key>DATABASE_URL</key>
+	<string>https://yougram--com-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

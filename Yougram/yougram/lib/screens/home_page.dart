@@ -1,0 +1,149 @@
+// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
+
+import 'package:flutter/material.dart';
+import 'package:yougram/pages/pages.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
+
+class Homepage extends StatefulWidget {
+  final title;
+  const Homepage({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  int _pageindex = 0;
+
+  final PageController _pageController = PageController(initialPage: 0);
+
+  @override
+  Widget build(BuildContext context) {
+    var scaffold = Scaffold(
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   title: const Center(
+      //     child: Text(
+      //       'Yourgam',
+      //       style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+      //     ),
+      //   ),
+      //   leadingWidth: 54,
+      //   leading: Align(
+      //     alignment: Alignment.centerRight,
+      //     child: IconBackground(
+      //       icon: Icons.search,
+      //       onTap: () {
+      //         //logger.i('TODO search');
+      //       },
+      //     ),
+      //   ),
+      //   // ignore: prefer_const_literals_to_create_immutables
+      //   actions: [
+      //     const Padding(
+      //       padding: EdgeInsets.only(right: 20.0),
+      //       child: Hero(
+      //         tag: 'hero-profile-picture',
+      //         child: CircleAvatar(
+      //           radius: 20,
+      //           //backgroundImage: AssetImage('img/1.jpg'),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (newindex) {
+          setState(() {
+            _pageindex = newindex;
+          });
+        },
+        children: const [
+          MessagesPage(),
+          Post(),
+          NotificationsPage(),
+          ProfilePage(),
+        ],
+      ),
+      bottomNavigationBar: Bottom_Nav_Bar(
+          pageindex: _pageindex, pageController: _pageController),
+    );
+    return scaffold;
+  }
+}
+
+class Bottom_Nav_Bar extends StatelessWidget {
+  const Bottom_Nav_Bar({
+    Key? key,
+    required int pageindex,
+    required PageController pageController,
+  })  : _pageindex = pageindex,
+        _pageController = pageController,
+        super(key: key);
+
+  final int _pageindex;
+  final PageController _pageController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 5,
+            color: Colors.black.withOpacity(.1),
+          )
+        ],
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+          child: GNav(
+            // tabBorderRadius: 15,
+            rippleColor: Colors.grey[300]!,
+            hoverColor: Colors.grey[100]!,
+            gap: 8,
+            activeColor: Colors.black,
+            iconSize: 24,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 11),
+            duration: const Duration(milliseconds: 400),
+            tabBackgroundColor: const Color.fromARGB(255, 225, 225, 225),
+            color: Colors.black,
+            // ignore: prefer_const_literals_to_create_immutables
+            tabs: [
+              const GButton(
+                icon: LineIcons.home,
+                text: 'Home',
+              ),
+              const GButton(
+                icon: LineIcons.search,
+                text: 'Search',
+              ),
+              const GButton(
+                icon: LineIcons.heart,
+                text: 'Likes',
+              ),
+              const GButton(
+                icon: LineIcons.user,
+                text: 'Now!',
+              ),
+            ],
+            selectedIndex: _pageindex,
+            onTabChange: (index) {
+              _pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.ease);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
