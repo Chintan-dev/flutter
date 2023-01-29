@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "102066666482",
-    "project_id": "rescue-food-9d5c0",
-    "storage_bucket": "rescue-food-9d5c0.appspot.com"
+    "project_number": "151666181556",
+    "firebase_url": "https://yougram-7db0b-default-rtdb.firebaseio.com",
+    "project_id": "yougram-7db0b",
+    "storage_bucket": "yougram-7db0b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:102066666482:android:34e84ec46a5b5f9f31096b",
+        "mobilesdk_app_id": "1:151666181556:android:ef869a60925c1b40091ee1",
         "android_client_info": {
           "package_name": "com.example.yougram"
         }
       },
       "oauth_client": [
         {
-          "client_id": "102066666482-uok7567e6sbentj6un28n6ts8v7q6ddj.apps.googleusercontent.com",
+          "client_id": "151666181556-k8r7fpp7rtela10t8abf4b24be4d6215.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCP8gCBlhkBnlnLRdre0oHc6OCOteoYP4M"
+          "current_key": "AIzaSyDGTcmmR3qgiX9ozHSiKL3DdLXW1zkQTs0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "102066666482-uok7567e6sbentj6un28n6ts8v7q6ddj.apps.googleusercontent.com",
+              "client_id": "151666181556-ev884t4n303l1vcbqbd6e94fefinvan1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

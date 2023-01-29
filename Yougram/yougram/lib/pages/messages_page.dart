@@ -1,7 +1,13 @@
-// ignore_for_file: unused_element, unused_import
+// ignore_for_file: unused_element, unused_import, prefer_typing_uninitialized_variables
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../Data/data.dart';
+import '../screens/User_chats.dart';
+import '../screens/hero.dart';
+import '../screens/story_page_view.dart';
 // import 'package:yougram/pages/pages.dart';
 
 class MessagesPage extends StatelessWidget {
@@ -9,21 +15,17 @@ class MessagesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Stories', style: TextStyle(letterSpacing: 2.0)),
-              Storys(),
-              SizedBox(height: 7),
-              Chats(),
-            ],
-          ),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Stories', style: TextStyle(letterSpacing: 2.5)),
+          Storys(),
+          SizedBox(height: 10),
+          Chats(),
+        ],
+      ),
     );
   }
 }
@@ -33,26 +35,46 @@ class Storys extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          // all storys containers
-          for (int i = 1; i <= 7; i++)
-            Column(
-              children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 7),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('./img/$i.jpg'),
-                    radius: 35,
+    // all storys containers
+    return SizedBox(
+      height: 100,
+      child: Expanded(
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: items.length,
+          itemBuilder: ((context, index) {
+            final item = items[index];
+            return GestureDetector(
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) => StoryPageView(item: item)),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(item.photoURL),
+                      radius: 35,
+                    ),
                   ),
-                ),
-                Text('$i')
-              ],
-            ),
-        ],
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Expanded(
+                    child: Text(
+                      item.displayName,
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
@@ -63,36 +85,105 @@ class Chats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (int i = 1; i <= 9; i++)
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 2),
-            color: const Color.fromARGB(80, 206, 206, 206),
-            height: 70,
-            child: Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('./img/1.jpg'),
-                    radius: 30,
+    return Expanded(
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: ((context, index) {
+          final item = items[index];
+          var msgDate;
+          msgDate = '1';
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Hero(
+                transitionOnUserGestures: true,
+                tag: item,
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => Profile(item: item)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(item.photoURL),
+                      radius: 30,
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+              ),
+              const SizedBox(width: 15),
+              Expanded(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => User_Chats(item: item)),
+                  ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      // username
-                      Text('Username'),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.displayName,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            overflow: TextOverflow.ellipsis,
+                            'Hi this is ${item.displayName}',
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Text(
+                              '1/1/23',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              width: 18,
+                              height: 18,
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(206, 53, 55, 205),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Center(
+                                child: Text(
+                                  msgDate.toUpperCase(),
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-      ],
+              )
+            ],
+          );
+        }),
+      ),
     );
   }
 }

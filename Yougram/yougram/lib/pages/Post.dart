@@ -1,6 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:yougram/Data/data.dart';
+
+import '../screens/hero.dart';
 
 class Post extends StatefulWidget {
   const Post({Key? key, this.title, this.val}) : super(key: key);
@@ -13,75 +16,96 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
-  Widget _smallImage(int val) {
-    val++;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 6),
-      child: CircleAvatar(
-        backgroundImage: AssetImage('./img/$val.jpg'),
-        radius: 28,
-      ),
-    );
-  }
-
-  Widget _bigImage(val) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 6),
-      width: 300,
-      height: 300,
-      child: CircleAvatar(
-        backgroundImage: AssetImage('./img/$val.jpg'),
-        radius: 28,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: List<Widget>.generate(9, (index) {
-          Key n1 = GlobalKey();
-          int val = index;
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              leading: GestureDetector(
-                key: n1,
-                child: Hero(
-                  tag: index.toString(),
-                  child: _smallImage(val),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(55, 0, 0, 0),
+        elevation: 0,
+        actions: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 13,
+                  ),
+                  hintText: "Type something...",
+                  filled: true,
+                  enabledBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  // fillColor: const Color.fromARGB(121, 255, 255, 255),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(0, 255, 255, 255), width: 0),
+                  ),
                 ),
-                onTap: () => _fullImagePage(context, val, index.toString()),
+                textInputAction: TextInputAction.next,
               ),
-              title: Text('Tap for transition $val'),
-            ),
-          );
-        }),
-      ),
-    );
-  }
 
-  void _fullImagePage(BuildContext context, val, String tag) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (ctx) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(49, 0, 0, 0),
-          elevation: 1,
-          title: Text("Big Image $val"),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Hero(
-                tag: tag,
-                child: _bigImage(val),
-              ),
-            ],
+              // child: TextField(
+              //   //controller: controller.textEditingController,
+              //   onChanged: (val) {
+              //     //controller.text = val;
+              //   },
+              //   style: const TextStyle(fontSize: 14),
+              //   decoration: const InputDecoration(
+              //     hintText: 'Type something...',
+              //     border: InputBorder.none,
+              //   ),
+              //   //onSubmitted: (_) => ,
+              // ),
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 12,
+              right: 24.0,
+            ),
+            child: IconButton(
+              color: Colors.amber,
+              icon: const Icon(Icons.search),
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
-    ));
+      body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: ((context, index) {
+            final item = items[index];
+            return Row(
+              children: [
+                Hero(
+                  transitionOnUserGestures: true,
+                  tag: item,
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => Profile(item: item)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(item.photoURL),
+                        radius: 30,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Text(
+                  item.displayName,
+                  // style: const TextStyle(fontSize: 24),
+                ),
+              ],
+            );
+          })),
+    );
   }
 }

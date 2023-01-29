@@ -1,6 +1,7 @@
-// ignore_for_file: camel_case_types, avoid_print
+// ignore_for_file: camel_case_types, avoid_print, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({Key? key}) : super(key: key);
@@ -8,11 +9,6 @@ class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(actions: const [
-      //   Text('NotificationsPage', style: TextStyle(letterSpacing: 2.0)),
-      //   SizedBox(height: 7),
-      //   NotificationsBar(),
-      // ]),
       body: ListView(
         children: [
           Padding(
@@ -24,7 +20,7 @@ class NotificationsPage extends StatelessWidget {
                 SizedBox(height: 7),
                 NotificationsBar(),
                 SizedBox(height: 7),
-                Notificationsbody(),
+                //Notificationsbody(),
               ],
             ),
           ),
@@ -77,9 +73,15 @@ class Notificationsbody extends StatelessWidget {
   }
 }
 
-class NotificationsBar extends StatelessWidget {
+// ignore: must_be_immutable
+class NotificationsBar extends StatefulWidget {
   const NotificationsBar({super.key});
 
+  @override
+  State<NotificationsBar> createState() => _NotificationsBarState();
+}
+
+class _NotificationsBarState extends State<NotificationsBar> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -87,12 +89,12 @@ class NotificationsBar extends StatelessWidget {
       child: Row(
         children: const [
           // Rowboxs
-          Items_Box(itemname: 'All activity'),
-          Items_Box(itemname: 'Likes'),
-          Items_Box(itemname: 'Comments'),
-          Items_Box(itemname: 'Mentions'),
-          Items_Box(itemname: 'Others'),
-          Items_Box(itemname: 'Others'),
+          Items_Box(index: '1', itemname: 'All activity'),
+          Items_Box(index: '2', itemname: 'Likes'),
+          Items_Box(index: '3', itemname: 'Comments'),
+          Items_Box(index: '5', itemname: 'Mentions'),
+          Items_Box(index: '6', itemname: 'Others'),
+          Items_Box(index: '7', itemname: 'Others'),
         ],
       ),
     );
@@ -103,30 +105,40 @@ class Items_Box extends StatelessWidget {
   const Items_Box({
     Key? key,
     required this.itemname,
+    required this.index,
   }) : super(key: key);
 
   final String? itemname;
+  final index;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-      child: Container(
-        height: 40,
-        width: 100,
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 225, 225, 225),
-            borderRadius: BorderRadius.circular(20)),
-        child: SizedBox(
-          child: Center(
-              child: Text(
-            itemname!,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-              //fontSize: 16,
-              // fontWeight: FontWeight.bold,
-            ),
-          )),
+      child: GestureDetector(
+        onTap: () {
+          Fluttertoast.showToast(
+            msg: itemname!,
+            // msg: index!,
+          );
+        },
+        child: Container(
+          height: 40,
+          width: 100,
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 225, 225, 225),
+              borderRadius: BorderRadius.circular(20)),
+          child: SizedBox(
+            child: Center(
+                child: Text(
+              itemname!,
+              style: const TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+                //fontSize: 16,
+                // fontWeight: FontWeight.bold,
+              ),
+            )),
+          ),
         ),
       ),
     );
