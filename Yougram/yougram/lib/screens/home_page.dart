@@ -22,24 +22,26 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    var scaffold = Scaffold(
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (newindex) {
-          setState(() {
-            _pageindex = newindex;
-          });
-        },
-        children: const [
-          MessagesPage(),
-          Feed(),
-          Post(),
-          NotificationsPage(),
-          ProfilePage(),
-        ],
+    var scaffold = SafeArea(
+      child: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (newindex) {
+            setState(() {
+              _pageindex = newindex;
+            });
+          },
+          children: const [
+            MessagesPage(),
+            Feed(),
+            Post(),
+            NotificationsPage(),
+            ProfilePage(),
+          ],
+        ),
+        bottomNavigationBar: Bottom_Nav_Bar(
+            pageindex: _pageindex, pageController: _pageController),
       ),
-      bottomNavigationBar: Bottom_Nav_Bar(
-          pageindex: _pageindex, pageController: _pageController),
     );
     return scaffold;
   }

@@ -26,26 +26,28 @@ class _PostState extends State<Post> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 16.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 13,
+              child: Center(
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 13,
+                    ),
+                    hintText: "Type something...",
+                    filled: true,
+                    enabledBorder: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    // fillColor: const Color.fromARGB(121, 255, 255, 255),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(
+                          color: Color.fromARGB(0, 255, 255, 255), width: 0),
+                    ),
                   ),
-                  hintText: "Type something...",
-                  filled: true,
-                  enabledBorder: UnderlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  // fillColor: const Color.fromARGB(121, 255, 255, 255),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(0, 255, 255, 255), width: 0),
-                  ),
+                  textInputAction: TextInputAction.next,
                 ),
-                textInputAction: TextInputAction.next,
               ),
 
               // child: TextField(

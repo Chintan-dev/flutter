@@ -45,10 +45,10 @@ class _LoginboxState extends State<Loginbox> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 50, bottom: 10),
+        padding: const EdgeInsets.only(top: 100, bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
           children: [
             const Padding(
               padding: EdgeInsets.symmetric(
@@ -364,17 +364,21 @@ class LoginBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: (() {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) {
+          return const Homepage();
+        }));
         // Navigator.push(context,
-        //     MaterialPageRoute(builder:
-        //         (BuildContext context) {
-        //   return MyAppbar();
+        //     MaterialPageRoute(builder: (BuildContext context) {
+        //   return const Homepage();
         // }));
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("This login function not working try google or FB"),
-          ),
-        );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(
+        //     content: Text("This login function not working try google or FB"),
+        //   ),
+        // );
+
         // final email = _emailController.text;
         //   final isValidFrom =
         //       fromKey.currentState!.validate();
